@@ -12,7 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import {FlightModule} from './flight/flight.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpInterceptor} from '@angular/common/http';
+import {HttpInterceptorService} from './http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,13 @@ import {HttpClientModule} from '@angular/common/http';
     MatListModule,
     FlightModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
