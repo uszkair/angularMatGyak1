@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FlightService} from './flight.service';
+import {Flight} from './models/flight.model';
 
 @Component({
   selector: 'app-flight',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flight.component.scss']
 })
 export class FlightComponent implements OnInit {
+  flights: Flight[];
+  displayedColumns = ['flightNumber', 'departureCity', 'arrivalCity']
 
-  constructor() { }
+  constructor(private flightService: FlightService) { }
 
   ngOnInit() {
+    this.flightService.listFlights().subscribe(
+      (fligths) => {
+        this.flights = fligths;
+      },
+      error => {}
+    );
   }
 
 }
