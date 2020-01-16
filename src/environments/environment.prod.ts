@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'http://szia-backend.herokuapp.com/api/Flights'
 };
